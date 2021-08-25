@@ -4,41 +4,55 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
 </head>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[name='readForm']");
+	$(document)
+			.ready(
+					function() {
+						var formObj = $("form[name='readForm']");
 
-		// 수정 
-		$(".update_btn").on("click", function() {
-			formObj.attr("action", "/board/updateView");
-			formObj.attr("method", "get");
-			formObj.submit();
-		})
+						// 수정 
+						$(".update_btn").on("click", function() {
+							formObj.attr("action", "/board/updateView");
+							formObj.attr("method", "get");
+							formObj.submit();
+						})
 
-		// 삭제
-		$(".delete_btn").on("click", function() {
+						// 삭제
+						$(".delete_btn").on("click", function() {
 
-			var deleteYN = confirm("삭제하시겠습니가?");
-			if (deleteYN == true) {
+							var deleteYN = confirm("삭제하시겠습니가?");
+							if (deleteYN == true) {
 
-				formObj.attr("action", "/board/delete");
-				formObj.attr("method", "post");
-				formObj.submit();
+								formObj.attr("action", "/board/delete");
+								formObj.attr("method", "post");
+								formObj.submit();
 
-			}
-		})
+							}
+						})
 
-		// 취소
-		$(".list_btn").on("click", function() {
+						// 목록
+						$(".list_btn")
+								.on(
+										"click",
+										function() {
 
-			location.href = "/board/list";
-		})
-	})
+											location.href = "/board/list?page=${scri.page}"
+													+ "&perPageNum=${scri.perPageNum}"
+													+ "&searchType=${scri.searchType}&keyword=${scri.keyword}";
+										})
+
+						// 취소
+						$(".cancel_btn").on("click", function() {
+
+							location.href = "/board/list";
+						})
+					})
 </script>
 
 <body>
@@ -56,7 +70,13 @@
 
 		<section id="container">
 			<form name="readForm" role="form" method="post">
-				<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+				<input type="hidden" id="bno" name="bno" value="${read.bno}" /> <input
+					type="hidden" id="page" name="page" value="${scri.page}"> <input
+					type="hidden" id="perPageNum" name="perPageNum"
+					value="${scri.perPageNum}"> <input type="hidden"
+					id="searchType" name="searchType" value="${scri.searchType}">
+				<input type="hidden" id="keyword" name="keyword"
+					value="${scri.keyword}">
 			</form>
 			<table>
 				<tbody>
@@ -66,8 +86,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td><label for="content">내용</label>
-						<textarea id="content" name="content" readonly="readonly"><c:out
+						<td><label for="content">내용</label> <textarea id="content"
+								name="content" readonly="readonly"><c:out
 									value="${read.content}" /></textarea></td>
 					</tr>
 					<tr>
@@ -82,9 +102,9 @@
 				</tbody>
 			</table>
 			<div>
-				<button type="submit" class="update_btn">수정</button>
-				<button type="submit" class="delete_btn">삭제</button>
-				<button type="submit" class="list_btn">목록</button>
+				<button type="button" class="update_btn">수정</button>
+				<button type="button" class="delete_btn">삭제</button>
+				<button type="button" class="list_btn">목록</button>
 			</div>
 		</section>
 		<hr />

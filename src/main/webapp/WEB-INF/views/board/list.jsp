@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
@@ -40,8 +41,13 @@ li {
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td><c:out value="${list.bno}" /></td>
-							<td><a href="/board/readView?bno=${list.bno}"><c:out
-										value="${list.title}" /></a></td>
+							<td>
+							<a href="/board/readView?bno=${list.bno}&
+													page=${scri.page}&
+													perPageNum=${scri.perPageNum}&
+													searchType=${scri.searchType}&
+													keyword=${scri.keyword}"><c:out value="${list.title}" /></a>
+													</td>
 							<td><c:out value="${list.writer}" /></td>
 							<td><fmt:formatDate value="${list.regdate}"
 									pattern="yyyy-MM-dd" /></td>

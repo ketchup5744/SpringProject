@@ -4,29 +4,37 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
 </head>
 <
 <script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("form[name='updateForm']");
+	$(document).ready(
+			function() {
+				var formObj = $("form[name='updateForm']");
 
-		$(".cancel_btn").on("click", function() {
-			event.preventDefault();
-			location.href = "/board/list";
-		})
+				$(".cancel_btn").on(
+						"click",
+						function() {
+							event.preventDefault();
+							location.href = "/board/readView?bno=${update.bno}"
+									+ "&page=${scri.page}"
+									+ "&perPageNum=${scri.perPageNum}"
+									+ "&searchType=${scri.searchType}"
+									+ "&keyword=${scri.keyword}";
+						})
 
-		$(".update_btn").on("click", function() {
-			if (fn_valiChk()) {
-				return false;
-			}
-			formObj.attr("action", "/board/update");
-			formObj.attr("method", "post");
-			formObj.submit();
-		})
-	})
+				$(".update_btn").on("click", function() {
+					if (fn_valiChk()) {
+						return false;
+					}
+					formObj.attr("action", "/board/update");
+					formObj.attr("method", "post");
+					formObj.submit();
+				})
+			})
 
 	function fn_valiChk() {
 		var updateForm = $("form[name='updateForm'] .chk").length;
@@ -81,8 +89,8 @@
 					</tbody>
 				</table>
 				<div>
-					<button type="submit" class="update_btn">저장</button>
-					<button type="submit" class="cancel_btn">취소</button>
+					<button type="button" class="update_btn">저장</button>
+					<button type="button" class="cancel_btn">취소</button>
 				</div>
 			</form>
 		</section>

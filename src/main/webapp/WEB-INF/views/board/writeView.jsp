@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
+<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>게시판</title>
@@ -58,7 +59,7 @@
 								id="writer" name="writer" class="chk" title="작성자를 입력하세요." /></td>
 						<tr>
 							<td>
-								<button class="write_btn" type="submit">작성</button>
+								<button class="write_btn" type="button">작성</button>
 							</td>
 						</tr>
 					</tbody>
