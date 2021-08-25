@@ -16,13 +16,32 @@
 		, #{writer} )
 	</insert>
 
-	<select id="list" resultType="com.rilla.vo.BoardVO">
-		SELECT BNO
-		, TITLE
-		, WRITER
-		, REGDATE
+	<select id="listPage" resultType="com.rilla.vo.BoardVO"
+		parameterType="com.rilla.vo.Criteria">
+		SELECT BNO,
+		TITLE,
+		CONTENT,
+		WRITER,
+		REGDATE
+		FROM (
+		SELECT BNO,
+		TITLE,
+		CONTENT,
+		WRITER,
+		REGDATE,
+		ROW_NUMBER() OVER(ORDER BY BNO ASC) AS
+		RNUM
 		FROM MP_BOARD
-		ORDER BY BNO DESC
+		) MP
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(BNO)
+		  FROM MP_BOARD
+		 WHERE BNO > 0
+	]]>
 	</select>
 
 	<select id="read" parameterType="int"
@@ -38,7 +57,8 @@
 
 	<update id="update" parameterType="com.rilla.vo.BoardVO">
 		UPDATE MP_BOARD
-		SET TITLE = #{title},
+		SET TITLE =
+		#{title},
 		CONTENT = #{content}
 		WHERE BNO = #{bno}
 	</update>
@@ -46,7 +66,8 @@
 	<delete id="delete" parameterType="int">
 		DELETE
 		FROM MP_BOARD
-		WHERE BNO = #{bno}
+		WHERE BNO =
+		#{bno}
 	</delete>
 
 </mapper>
