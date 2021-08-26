@@ -4,6 +4,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="replyMapper">
 
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="com.rilla.vo.ReplyVO">
+		UPDATE MP_REPLY SET
+		CONTENT = #{content}
+		WHERE RNO = #{rno}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="com.rilla.vo.ReplyVO">
+		DELETE FROM MP_REPLY
+		WHERE RNO = #{rno}
+	</delete>
+
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="com.rilla.vo.ReplyVO">
+		SELECT
+		BNO
+		, RNO
+		, CONTENT
+		, WRITER
+		, REGDATE
+		FROM MP_REPLY
+		WHERE RNO = #{rno}
+	</select>
+
 	<!-- 댓글 조회 -->
 	<select id="readReply" resultType="com.rilla.vo.ReplyVO">
 		SELECT
@@ -24,7 +49,8 @@
 		VALUES( #{bno}
 		, (select nextval(MP_REPLY_SEQ))
 		, #{content}
-		, #{writer} )
+		, #{writer}
+		)
 	</insert>
 
 </mapper>
