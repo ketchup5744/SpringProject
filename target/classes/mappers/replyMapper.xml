@@ -7,9 +7,24 @@
 	<!-- 댓글 조회 -->
 	<select id="readReply" resultType="com.rilla.vo.ReplyVO">
 		SELECT
-		RNO, CONTENT, WRITER, REGDATE
+		RNO, CONTENT, WRITER,
+		REGDATE
 		FROM MP_REPLY
 		WHERE BNO = #{bno}
 	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="writeReply">
+		INSERT INTO MP_REPLY(
+		BNO
+		, RNO
+		, CONTENT
+		, WRITER
+		)
+		VALUES( #{bno}
+		, (select nextval(MP_REPLY_SEQ))
+		, #{content}
+		, #{writer} )
+	</insert>
 
 </mapper>

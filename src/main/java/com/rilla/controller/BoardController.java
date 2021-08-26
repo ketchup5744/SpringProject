@@ -28,7 +28,7 @@ public class BoardController {
 
 	@Inject
 	BoardService service;
-	
+
 	@Inject
 	ReplyService replyService;
 
@@ -113,6 +113,19 @@ public class BoardController {
 		rttr.addAttribute("keyword", scri.getKeyword());
 
 		return "redirect:/board/list";
+	}
+
+	// 댓글 작성
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
+	public String replyWrite(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+		logger.info("reply Write");
+		replyService.writeReply(vo);
+		rttr.addAttribute("bno", vo.getBno());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+		return "redirect:/board/readView";
 	}
 
 }
