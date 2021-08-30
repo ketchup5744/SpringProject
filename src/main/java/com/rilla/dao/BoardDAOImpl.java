@@ -67,4 +67,10 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("boardMapper.selectFileList", bno);
 	}
 
+	// 첨부파일 다운로드
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("boardMapper.selectFileInfo", map);
+	}
 }
