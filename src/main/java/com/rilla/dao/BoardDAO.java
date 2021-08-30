@@ -1,6 +1,7 @@
 package com.rilla.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rilla.vo.BoardVO;
 import com.rilla.vo.SearchCriteria;
@@ -24,4 +25,6 @@ public interface BoardDAO {
 
 	// 게시물 삭제
 	public void delete(int bno) throws Exception;
+
+	public void insertFile(Map<String, Object> map) throws Exception;
 }

@@ -44,8 +44,9 @@
     </bean>
     
     <!-- scan -->
-    <context:component-scan base-package="kr.co.service"></context:component-scan>
-    <context:component-scan base-package="kr.co.dao"></context:component-scan>
-    <context:component-scan base-package="kr.co.vo"></context:component-scan>
+    <context:component-scan base-package="com.rilla.service"></context:component-scan>
+    <context:component-scan base-package="com.rilla.dao"></context:component-scan>
+    <context:component-scan base-package="com.rilla.vo"></context:component-scan>
+    <context:component-scan base-package="com.rilla.util"></context:component-scan>
 		
 </beans>
