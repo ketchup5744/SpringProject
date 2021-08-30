@@ -8,7 +8,8 @@
 	<insert id="insert" parameterType="com.rilla.vo.BoardVO"
 		useGeneratedKeys="true" keyProperty="bno">
 		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
-			SELECT nextval(MP_BOARD_SEQ) FROM DUAL
+			SELECT
+			nextval(MP_BOARD_SEQ) FROM DUAL
 		</selectKey>
 		INSERT INTO MP_BOARD( BNO
 		, TITLE
@@ -104,5 +105,16 @@
 		#{FILE_SIZE}
 		)
 	</insert>
+
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int"
+		resultType="hashMap">
+		SELECT FILE_NO,
+		ORG_FILE_NAME,
+		ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		FROM MP_FILE
+		WHERE BNO = #{BNO}
+	</select>
+
 
 </mapper>

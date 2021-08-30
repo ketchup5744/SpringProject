@@ -26,5 +26,9 @@ public interface BoardDAO {
 	// 게시물 삭제
 	public void delete(int bno) throws Exception;
 
+	// 첨부파일 업로드
 	public void insertFile(Map<String, Object> map) throws Exception;
+
+	// 첨부파일 조회
+	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
 }
